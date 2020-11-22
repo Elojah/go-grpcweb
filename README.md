@@ -1,2 +1,2 @@
-# go-grpc
-Standard game_0X GRPC service for golang
+# go-grpcweb
+Standard game_0X GRPC web service for golang
