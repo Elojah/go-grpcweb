@@ -46,6 +46,7 @@ func (s *Service) Dial(ctx context.Context, cfg Config) error {
 			return true
 		}),
 		grpcweb.WithWebsockets(cfg.WebSocket),
+		grpcweb.WithWebsocketOriginFunc(s.IsGrpcWebSocketRequest),
 	)
 
 	s.Register()
