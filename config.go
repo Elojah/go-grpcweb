@@ -9,5 +9,7 @@ type Config struct {
 	NumStreamWorkers  uint `json:"num_stream_workers" env:"GRPCWEB_NUM_STREAM_WORKERS"`
 	MaxRecvMsgSize    uint `json:"max_recv_msg_size" env:"GRPCWEB_MAX_RECV_MSG_SIZE"`
 
+	WebSocket bool `json:"web_socket" env:"GRPCWEB_WEB_SOCKET"`
+
 	Origin map[string]interface{} `json:"origin" env:"GRPCWEB_ORIGIN"`
 }
