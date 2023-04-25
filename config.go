@@ -12,4 +12,6 @@ type Config struct {
 	WebSocket bool `json:"web_socket" env:"GRPCWEB_WEB_SOCKET"`
 
 	Origin map[string]interface{} `json:"origin" env:"GRPCWEB_ORIGIN"`
+
+	ForceStop bool `json:"force_stop" env:"FORCE_STOP"`
 }

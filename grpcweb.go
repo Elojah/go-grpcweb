@@ -16,10 +16,14 @@ type Service struct {
 
 	*grpc.Server
 	*grpcweb.WrappedGrpcServer
+
+	config Config
 }
 
 // Dial connects client to external redis service.
 func (s *Service) Dial(ctx context.Context, cfg Config) error {
+	s.config = cfg
+
 	opts := []grpc.ServerOption{
 		grpc.ConnectionTimeout(time.Duration(cfg.ConnectionTimeout) * time.Second),
 		grpc.NumStreamWorkers(uint32(cfg.NumStreamWorkers)),
@@ -55,7 +59,13 @@ func (s *Service) Dial(ctx context.Context, cfg Config) error {
 }
 
 func (s *Service) Close(ctx context.Context) error {
-	s.Server.GracefulStop()
+	if s.Server != nil {
+		if s.config.ForceStop {
+			s.Server.Stop()
+		} else {
+			s.Server.GracefulStop()
+		}
+	}
 
 	return nil
 }
